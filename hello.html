@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello 버튼</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #000000;
+    }
+    :root[data-theme="dark"] {
+      --bg: #000000;
+      --fg: #ffffff;
+    }
+
     body {
       font-family: "Malgun Gothic", sans-serif;
       display: flex;
@@ -13,7 +22,9 @@
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      background: skyblue;
+      background: var(--bg);
+      color: var(--fg);
+      transition: background 0.3s, color 0.3s;
     }
     button {
       padding: 12px 28px;
@@ -38,10 +49,16 @@
 <body>
   <button id="helloBtn">버튼</button>
   <div id="output"></div>
+  <button id="themeBtn" style="margin-top: 32px;">흰색/검정 모드</button>
 
   <script>
     document.getElementById("helloBtn").addEventListener("click", function () {
       document.getElementById("output").textContent = "hello";
+    });
+
+    document.getElementById("themeBtn").addEventListener("click", function () {
+      const root = document.documentElement;
+      root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
     });
   </script>
 </body>
